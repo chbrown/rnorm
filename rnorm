@@ -1,0 +1,68 @@
+#!/usr/bin/env node
+
+function NormalDistribution(mean, sd) {
+  this._cache = [];
+  this.mean = mean;
+  this.sd = sd;
+}
+NormalDistribution.prototype._fill = function() {
+  // https://en.wikipedia.org/wiki/Box-Muller_transform
+  var u1 = Math.random();
+  var u2 = Math.random();
+  var a = Math.sqrt(-2 * Math.log(u1));
+  var b = 2.0 * Math.PI * u2;
+  var z1 = a * Math.cos(b);
+  var z2 = a * Math.sin(b);
+  this._cache.push(z1, z2);
+};
+NormalDistribution.prototype.next = function() {
+  if (this._cache.length === 0) {
+    this._fill();
+  }
+  var z = this._cache.pop();
+  return (z * this.sd) + this.mean;
+};
+
+exports.NormalDistribution = NormalDistribution;
+
+function main() {
+  var yargs = require('yargs')
+    .usage('Usage: rnorm --mean 5 --std 2')
+    .describe({
+      help: 'print this help message',
+      mean: 'mean',
+      sd: 'standard deviation',
+      number: 'number of random numbers to generate',
+      precision: 'number of digits to show after the decimal point',
+    })
+    .boolean(['help'])
+    .alias({
+      m: 'mean',
+      s: 'sd',
+      n: 'number',
+      p: 'precision',
+    })
+    .default({
+      mean: 0,
+      sd: 1,
+      number: 1,
+      precision: 3,
+    });
+
+  var argv = yargs.argv;
+
+  if (argv.help) {
+    yargs.showHelp();
+  }
+  else {
+    var normals = new NormalDistribution(argv.mean, argv.sd);
+    for (var i = 0; i < argv.number; i++) {
+      var t = normals.next();
+      console.log(t.toFixed(argv.precision));
+    }
+  }
+}
+
+if (require.main === module) {
+  main();
+}

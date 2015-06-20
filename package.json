@@ -1,0 +1,25 @@
+{
+  "name": "rnorm",
+  "description": "Generate random numbers from a Normal distribution",
+  "keywords": [
+    "random",
+    "number",
+    "generator",
+    "normal",
+    "gaussian",
+    "cli"
+  ],
+  "version": "0.0.0",
+  "homepage": "https://github.com/chbrown/rnorm",
+  "repository": "git://github.com/chbrown/rnorm.git",
+  "bugs": "https://github.com/chbrown/rnorm/issues",
+  "author": "Christopher Brown <io@henrian.com> (http://henrian.com)",
+  "license": "MIT",
+  "main": "rnorm",
+  "dependencies": {
+    "yargs": "*"
+  },
+  "bin": {
+    "rnorm": "rnorm"
+  }
+}
