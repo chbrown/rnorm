@@ -9,7 +9,7 @@
     "gaussian",
     "cli"
   ],
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "https://github.com/chbrown/rnorm",
   "repository": "git://github.com/chbrown/rnorm.git",
   "bugs": "https://github.com/chbrown/rnorm/issues",
