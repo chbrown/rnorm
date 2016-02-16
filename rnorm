@@ -26,7 +26,7 @@ NormalDistribution.prototype.next = function() {
 exports.NormalDistribution = NormalDistribution;
 
 function main() {
-  var yargs = require('yargs')
+  var argvparser = require('optimist')
     .usage('Usage: rnorm --mean 5 --std 2')
     .describe({
       help: 'print this help message',
@@ -49,10 +49,10 @@ function main() {
       precision: 3,
     });
 
-  var argv = yargs.argv;
+  var argv = argvparser.argv;
 
   if (argv.help) {
-    yargs.showHelp();
+    argvparser.showHelp();
   }
   else {
     var normals = new NormalDistribution(argv.mean, argv.sd);

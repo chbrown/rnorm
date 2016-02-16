@@ -17,7 +17,7 @@
   "license": "MIT",
   "main": "rnorm",
   "dependencies": {
-    "yargs": "*"
+    "optimist": "*"
   },
   "bin": {
     "rnorm": "rnorm"
